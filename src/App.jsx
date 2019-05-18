@@ -33,14 +33,14 @@ function Input({ addTask }) {
 
   const handleKey = e => {
     if (e.key === 'Enter') {
-      (text !== "" ? addTask(text) : UIkit.notification('Please type something.', 'danger'));
+      (text !== "" ? addTask(text) : UIkit.notification('Please type in something.', 'danger'));
     }
   }
 
   return (
     <div>
       <input className={"uk-input"} placeholder={"Write something here."} type="text" onKeyPress={handleKey} onChange={handleChange} />
-      <button className={"uk-button uk-button-primary uk-margin-top"} onClick={() => { text !== "" ? addTask(text) : UIkit.notification('Please type something.', 'danger') }}>Add Task</button>
+      <button className={"uk-button uk-button-primary uk-margin-top"} onClick={() => { text !== "" ? addTask(text) : UIkit.notification('Please type in something.', 'danger') }}>Add Task</button>
     </div>
   );
 }
@@ -130,11 +130,13 @@ function App() {
         {tasks.map((task, index) => <Task key={index} index={index} task={task} removeTask={removeTask} setCompleted={setCompleted} />)}
         <hr className="uk-divider-icon"></hr>
         <Input addTask={addTask} />
-        <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={setAllCompleted}>Set all to Completed</button>
-        <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={removeAllTasks}>Remove all Tasks</button>
-        <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={saveTasks}>
-          <span uk-icon="download"></span> Save all tasks as txt
-      </button>
+        <div className={"uk-margin-large-bottom"}>
+          <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={setAllCompleted}>Set all to Completed</button>
+          <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={removeAllTasks}>Remove all Tasks</button>
+          <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={saveTasks}>
+            <span uk-icon="download"></span> Save all tasks as txt
+          </button>
+        </div>
       </div >
     </React.Fragment>
   );
