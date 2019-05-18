@@ -30,9 +30,16 @@ function Input({ addTask }) {
     e.preventDefault();
     setText(e.target.value);
   }
+
+  const handleKey = e => {
+    if (e.key === 'Enter') {
+      (text !== "" ? addTask(text) : UIkit.notification('Please type something.', 'danger'));
+    }
+  }
+
   return (
     <div>
-      <input className={"uk-input"} placeholder={"Write something here."} type="text" onChange={handleChange} />
+      <input className={"uk-input"} placeholder={"Write something here."} type="text" onKeyPress={handleKey} onChange={handleChange} />
       <button className={"uk-button uk-button-primary uk-margin-top"} onClick={() => { text !== "" ? addTask(text) : UIkit.notification('Please type something.', 'danger') }}>Add Task</button>
     </div>
   );
