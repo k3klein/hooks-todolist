@@ -108,7 +108,7 @@ function App() {
       var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
       FileSaver.saveAs(blob, "tasks.txt");
     } else {
-      UIkit.notification('At least add one task.', 'danger');
+      UIkit.notification('Add one task at least.', 'danger');
     }
 
   }
