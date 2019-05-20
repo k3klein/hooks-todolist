@@ -123,7 +123,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <h1 className={"uk-background-primary uk-padding-small uk-animation-fade uk-text-bold"}>Neat Task Manager</h1>
+      <h1 className={"uk-background-primary uk-padding-small uk-animation-fade uk-text-bold"}>Task Manager</h1>
       <div className={"uk-container uk-animation-fade uk-margin-large-top"}>
         <h1 className={"uk-text-primary"}><p>Remaining Tasks: {tasks.filter(task => task.completed === false).length}</p></h1>
         <h5><p>Total Tasks: <span className="uk-badge">{tasks.length}</span></p></h5>
