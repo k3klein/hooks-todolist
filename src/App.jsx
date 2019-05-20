@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FileSaver from 'file-saver';
+import ReactFileReader from 'react-file-reader';
 import 'uikit/dist/css/uikit.css';
 import UIkit from 'uikit';
 import './App.css';
@@ -45,6 +46,13 @@ function Input({ addTask }) {
   );
 }
 
+function getCurrentDate() {
+  var today = new Date();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date + ' ' + time;
+  return dateTime;
+}
 
 function App() {
   const initialTasks = () => JSON.parse(window.localStorage.getItem("tasks")) ||
@@ -117,7 +125,36 @@ function App() {
     } else {
       UIkit.notification('Add one task at least.', 'danger');
     }
+  }
 
+  const exportTasks = () => {
+    if (tasks.length !== 0) {
+      const jsonList = JSON.stringify(tasks);
+      //console.log(text);
+      var blob = new Blob([jsonList], { type: "text/plain;charset=utf-8" });
+      FileSaver.saveAs(blob, "tasks" + getCurrentDate() + ".json");
+    } else {
+      UIkit.notification('Add one task at least.', 'danger');
+    }
+  }
+
+  const importTasks = (tasksRead) => {
+    let newTasks = tasksRead;
+    setTasks(newTasks);
+  }
+
+  const handleFiles = files => {
+    const reader = new FileReader();
+    let file = files[0];
+    console.log("file", file);
+    //console.log(files[0].slice(0, 100000000))
+    reader.readAsText(file);
+    reader.onload = () => {
+      console.log("reader result", reader.result);
+      const tasksRead = JSON.parse(reader.result);
+      console.log(tasksRead);
+      importTasks(tasksRead);
+    }
   }
 
 
@@ -136,6 +173,10 @@ function App() {
           <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={saveTasks}>
             <span uk-icon="download"></span> Save all tasks as txt
           </button>
+          <button className={"uk-button uk-button-default uk-margin-top uk-margin-right"} onClick={exportTasks}>Export</button>
+          <ReactFileReader fileTypes={[".json"]} multipleFiles={false} handleFiles={handleFiles}>
+            <button className='uk-button uk-button-default uk-margin-top uk-margin-right'>Import</button>
+          </ReactFileReader>
         </div>
       </div >
     </React.Fragment>
