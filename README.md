@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/896d91fb-9151-4d03-91bc-a25e35eccd33/deploy-status)](https://app.netlify.com/sites/eloquent-yalow-2515f3/deploys)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
