@@ -81,6 +81,7 @@ function App() {
   const removeAllTasks = () => {
     UIkit.modal.confirm('Are you sure?').then(function () {
       console.log('Confirmed.')
+      UIkit.notification('Removed ' + tasks.length + ' tasks.', 'primary');
       setTasks([]);
     }, function () {
       console.log('Rejected.')
@@ -101,7 +102,6 @@ function App() {
     let newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
-
   }
 
   const saveTasks = () => {
